@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AICS Tanay Digital Yearbook</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/custom.css">
+
+    <style>
+        :root {
+            --royal-blue: #0047AB;
+            --honey-lemon: #FFC30B;
+            --black: #000000;
+            --white: #FFFFFF;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--black);
+        }
+        
+        .navbar {
+            background-color: var(--royal-blue) !important;
+        }
+        
+        .card {
+            border-color: var(--royal-blue);
+            background-color: var(--white);
+            color: var(--black);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card img {
+            border-bottom: 3px solid var(--honey-lemon);
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-danger {
+            background-color: var(--honey-lemon) !important;
+            border-color: var(--honey-lemon) !important;
+            color: var(--black) !important;
+        }
+        
+        .btn-secondary {
+            background-color: var(--black) !important;
+            border-color: var(--black) !important;
+            color: var(--white) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--royal-blue);
+            border-color: var(--royal-blue);
+        }
+        
+        h2, h5 {
+            color: var(--royal-blue);
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            color: var(--black);
+            border: 2px solid var(--royal-blue);
+        }
+        
+        .modal-header {
+            background-color: var(--royal-blue);
+            color: var(--white);
+            border-bottom: 2px solid var(--honey-lemon);
+        }
+        
+        .student-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+            padding: 0 10px;
+            text-align: center;
+            background-color: var(--white);
+            border: 1px solid var(--royal-blue);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .show-info {
+            max-height: 300px;
+            padding: 10px;
+            background-color: var(--white);
+            color: var(--black);
+            border: 2px solid var(--honey-lemon);
+        }
+        
+        .student-info strong {
+            color: var(--royal-blue);
+        }
+        
+        .student-info p:last-child {
+            color: var(--black);
+            font-style: italic;
+        }
+
+        /* Login Form Styles */
+        .login-container {
+            max-width: 450px;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            background-color: var(--white);
+            border: 2px solid var(--royal-blue);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--royal-blue);
+        }
+        
+        .form-control:focus {
+            border-color: var(--royal-blue);
+            box-shadow: 0 0 0 0.25rem rgba(0, 71, 171, 0.25);
+        }
+        
+        #dashboardContent {
+            display: none;
+        }
+        
+        #loginForm {
+            display: block;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="HOMEPAGE PICS/Asian_Institute_of_Computer_Studies_(logo)-fotor-bg-remover-2025033184438.png" alt="AICS Logo" width="45" height="45" class="d-inline-block">
+            <span class="ms-2">AICS Tanay Digital Yearbook</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item" id="logoutButton" style="display: none;">
+                    <a class="nav-link btn btn-danger text-white px-3" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Logout Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="logoutModalLabel">Log Out</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to log out?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" onclick="logout()">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Login Form -->
+<div class="container" id="loginForm">
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="HOMEPAGE PICS/Asian_Institute_of_Computer_Studies_(logo)-fotor-bg-remover-2025033184438.png" alt="AICS Logo" width="80" height="80">
+        </div>
+        <h2 class="login-header">Student Login</h2>
+        
+        <div class="alert alert-danger" id="error-message" style="display: none;" role="alert">
+            Invalid student number. Please try again.
+        </div>
+        
+        <form id="studentLoginForm">
+            <div class="mb-3">
+                <label for="studentNumber" class="form-label">Student Number</label>
+                <input type="text" class="form-control" id="studentNumber" placeholder="Enter your student number" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                <div class="form-text">Default password is your student number</div>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Dashboard Content -->
+<div id="dashboardContent">
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Batch 2024 - BM2AA</h2>
+        <div class="row gx-4 gy-4">
+            <!-- Student 1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_ALBINA, MAY-GAN O.jpg" class="card-img-top" alt="Student 1" onclick="toggleInfo('info1')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info1">
+                            <p><strong>Albina, May-Gan O.</strong></p>
+                            <p>"Success is not the key to happiness. Happiness is the key to success."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 2 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_ANDREN, RYZEL WYN L.jpg" class="card-img-top" alt="Student 2" onclick="toggleInfo('info2')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info2">
+                            <p><strong>Andren, Ryzel Wyn L.</strong></p>
+                            <p>"Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 3 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_CATOLOS, JAENA S.jpg" class="card-img-top" alt="Student 3" onclick="toggleInfo('info3')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info3">
+                            <p><strong>Catolos, Jaena S.</strong></p>
+                            <p>"Don't be afraid to give up the good to go for the great."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 4 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_GARCIA, LARIANE NICOLE L.jpg" class="card-img-top" alt="Student 4" onclick="toggleInfo('info4')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info4">
+                            <p><strong>Garcia, Lariane Nicole L.</strong></p>
+                            <p>"Dream big, work hard, and make it happen."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 5 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_LEDESMA, CHARMAINE M.jpg" class="card-img-top" alt="Student 5" onclick="toggleInfo('info5')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info5">
+                            <p><strong>Ledesma, Charmaine M.</strong></p>
+                            <p>"Success is getting what you want. Happiness is wanting what you get."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 6 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_NAVIDAD, NIKKA O.jpg" class="card-img-top" alt="Student 6" onclick="toggleInfo('info6')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info6">
+                            <p><strong>Navidad, Nikka O.</strong></p>
+                            <p>"Your limitation—it's only your imagination."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 7 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_NESSIA, SHANE ANGELA C.jpg" class="card-img-top" alt="Student 7" onclick="toggleInfo('info7')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info7">
+                            <p><strong>Nessia, Shane Angela C.</strong></p>
+                            <p>"Doubt kills more dreams than failure ever will."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 8 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_PARANAS, PAULYN JOY A.jpg" class="card-img-top" alt="Student 8" onclick="toggleInfo('info8')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info8">
+                            <p><strong>Paranas, Paulyn Joy A.</strong></p>
+                            <p>"Success is not final, failure is not fatal: it is the courage to continue that counts."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 9 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_POLIDO, MARC JHON D.jpg" class="card-img-top" alt="Student 9" onclick="toggleInfo('info9')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info9">
+                            <p><strong>Polido, Marc Jhon D.</strong></p>
+                            <p>"Opportunities don't happen. You create them."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 10 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_RAMOS, JEDWHEN M.jpg" class="card-img-top" alt="Student 10" onclick="toggleInfo('info10')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info10">
+                            <p><strong>Ramos, Jedwhen M.</strong></p>
+                            <p>"Don't watch the clock; do what it does. Keep going."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 11 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_SENIAL, JOYCIE NICOLE O.jpg" class="card-img-top" alt="Student 11" onclick="toggleInfo('info11')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info11">
+                            <p><strong>Senial, Joycie Nicole O.</strong></p>
+                            <p>"Act as if what you do makes a difference. It does."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student 12 -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="BM2AA/ABM_SUAREZ, KYLA ANGELA.jpg" class="card-img-top" alt="Student 12" onclick="toggleInfo('info12')">
+                    <div class="card-body text-center">
+                        <div class="student-info" id="info12">
+                            <p><strong>Suarez, Kyla Angela</strong></p>
+                            <p>"It always seems impossible until it's done."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap & JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // List of authorized student numbers for BM2AA
+    const authorizedStudents = {
+        "221104": true,
+        "221051": true,
+        "221039": true,
+        "221111": true,
+        "221094": true,
+        "221062": true,
+        "221055": true,
+        "221100": true,
+        "201053": true,
+        "221036": true,
+        "221052": true,
+        "221097": true
+    };
+
+    // Check if user is already authenticated
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if user is authenticated via session storage
+        const authenticated = sessionStorage.getItem('authenticated');
+        const studentNumber = sessionStorage.getItem('studentNumber');
+        
+        if (authenticated === 'true' && authorizedStudents[studentNumber]) {
+            showDashboard();
+        }
+    });
+
+    // Handle login form submission
+    document.getElementById('studentLoginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const studentNumber = document.getElementById('studentNumber').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const errorMessage = document.getElementById('error-message');
+        
+        // Check if student number is authorized
+        if (authorizedStudents[studentNumber]) {
+            // Simple authentication - password matches student number
+            if (password === studentNumber) {
+                // Store authentication info in session storage
+                sessionStorage.setItem('authenticated', 'true');
+                sessionStorage.setItem('studentNumber', studentNumber);
+                
+                // Show dashboard
+                showDashboard();
+            } else {
+                // Show error for incorrect password
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = 'Incorrect password. Default password is your student number.';
+            }
+        } else {
+            // Show error for unauthorized student number
+            errorMessage.style.display = 'block';
+            errorMessage.textContent = 'Student number not authorized to access this system.';
+        }
+    });
+
+    // Function to show dashboard and hide login form
+    function showDashboard() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('dashboardContent').style.display = 'block';
+        document.getElementById('logoutButton').style.display = 'block';
+    }
+
+    // Toggle student information
+    function toggleInfo(infoId) {
+        var allInfos = document.querySelectorAll('.student-info');
+        allInfos.forEach(info => {
+            if (info.id !== infoId) {
+                info.classList.remove('show-info');
+            }
+        });
+        var selectedInfo = document.getElementById(infoId);
+        selectedInfo.classList.toggle('show-info');
+    }
+
+    // Logout function
+    function logout() {
+        // Clear session data
+        sessionStorage.clear();
+        
+        // Hide dashboard and show login form
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('dashboardContent').style.display = 'none';
+        document.getElementById('logoutButton').style.display = 'none';
+        
+        // Clear form inputs
+        document.getElementById('studentNumber').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('error-message').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

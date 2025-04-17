@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - AICS Tanay Yearbook</title>
+  <link rel="stylesheet" href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css">
+  <link rel="stylesheet" href="/static/css/custom.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --royal-blue: #0047AB;
+      --honey-yellow: #F9BF3B;
+      --black: #000000;
+      --white: #FFFFFF;
+    }
+    
+    body {
+      background-color: var(--royal-blue);
+      color: var(--white);
+    }
+    
+    .exit-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      z-index: 1000;
+    }
+    
+    .exit-btn .btn {
+      font-weight: bold;
+      padding: 8px 20px;
+      background-color: transparent;
+      border-color: var(--white);
+      color: var(--white);
+    }
+    
+    .exit-btn .btn:hover {
+      background-color: var(--white);
+      color: var(--royal-blue);
+    }
+
+    .circle-img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--honey-yellow);
+      cursor: pointer;
+    }
+    
+    h1, h5 {
+      color: var(--honey-yellow);
+    }
+    
+    .proponent-card {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      transition: transform 0.3s;
+      height: 100%;
+    }
+    
+    .proponent-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .student-info {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+      padding: 0 10px;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    
+    .show-info {
+      max-height: 200px;
+      padding: 10px;
+      border: 2px solid var(--honey-yellow);
+    }
+    
+    .student-info p {
+      color: var(--white);
+      font-style: italic;
+      margin-bottom: 0;
+    }
+    
+    @media (max-width: 576px) {
+      .exit-btn {
+        top: 10px;
+        right: 15px;
+      }
+    }
+    
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .col-wrapper {
+      display: flex;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Exit Button -->
+  <div class="exit-btn">
+    <a href="signup2.html">
+      <button class="btn btn-outline-light">
+        <i class="fas fa-arrow-left"></i> Exit
+      </button>
+    </a>
+  </div>
+
+  <div class="container py-5">
+    <h1 class="text-center mb-5">Meet the Proponents</h1>
+    <div class="row justify-content-center g-4">
+
+      <!-- Proponent 1 -->
+      <div class="col-md-3 col-wrapper">
+        <div class="proponent-card">
+          <div class="text-center">
+            <img src="Proponents/ALCANTARA.jpg" class="circle-img mb-3" alt="Alcantara, Aldrin James" onclick="toggleInfo('info1')">
+            <h5>Alcantara, Aldrin James B.</h5>
+            <div class="student-info" id="info1">
+              <p>Determined student and loverboy.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proponent 2 -->
+      <div class="col-md-3 col-wrapper">
+        <div class="proponent-card">
+          <div class="text-center">
+            <img src="Proponents/BAUTISTA.jpg" class="circle-img mb-3" alt="Bautista, Art Lennon" onclick="toggleInfo('info2')">
+            <h5>Bautista, Art Lennon B.</h5>
+            <div class="student-info" id="info2">
+              <p>The art itself.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proponent 3 -->
+      <div class="col-md-3 col-wrapper">
+        <div class="proponent-card">
+          <div class="text-center">
+            <img src="Proponents/BUENAVENTURA.jpg" class="circle-img mb-3" alt="Buenaventura, King Ildefonso" onclick="toggleInfo('info3')">
+            <h5>Buenaventura, King Ildefonso</h5>
+            <div class="student-info" id="info3">
+              <p>Thank you, ChatGPT!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proponent 4 -->
+      <div class="col-md-3 col-wrapper">
+        <div class="proponent-card">
+          <div class="text-center">
+            <img src="Proponents/FERNANDEZ.jpg" class="circle-img mb-3" alt="Fernandez, Roseanne" onclick="toggleInfo('info4')">
+            <h5>Fernandez, Roseanne D.</h5>
+            <div class="student-info" id="info4">
+              <p>The one and only girl in the group.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function toggleInfo(infoId) {
+      var allInfos = document.querySelectorAll('.student-info');
+      allInfos.forEach(info => {
+        if (info.id !== infoId) {
+          info.classList.remove('show-info');
+        }
+      });
+      var selectedInfo = document.getElementById(infoId);
+      selectedInfo.classList.toggle('show-info');
+    }
+  </script>
+
+</body>
+</html>
